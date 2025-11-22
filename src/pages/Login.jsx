@@ -1,40 +1,47 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate("/dashboard");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log("Logging in with", email, password);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white shadow-xl rounded-2xl p-10 w-full max-w-md border border-purple-300">
-        <h1 className="text-3xl font-bold text-center text-purple-700 mb-6">
-          Health & Wellness Login
-        </h1>
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-green-300 via-blue-200 to-purple-300">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-8 rounded-xl shadow-xl w-80"
+      >
+        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
         <input
-          type="text"
+          type="email"
           placeholder="Email"
-          className="w-full mb-4 p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-400 outline-none"
+          className="w-full p-2 border rounded mb-4"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
+
         <input
           type="password"
           placeholder="Password"
-          className="w-full mb-6 p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-400 outline-none"
+          className="w-full p-2 border rounded mb-4"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button
-          onClick={handleLogin}
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl transition-all"
+          type="submit"
+          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
         >
           Login
         </button>
-      </div>
+      </form>
     </div>
   );
-}
+};
+
+export default Login;
